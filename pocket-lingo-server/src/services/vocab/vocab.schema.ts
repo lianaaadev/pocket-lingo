@@ -13,11 +13,13 @@ export const vocabularySchema = {
   $id: 'Vocabulary',
   type: 'object',
   additionalProperties: false,
-  required: ['id', 'text'],
+  required: ['id', 'word'],
   properties: {
     id: { type: 'number' },
 
-    text: { type: 'string' }
+    word: { type: 'string', minLength: 1, maxLength: 100 },
+    definition: { type: 'string', minLength: 1, maxLength: 500 },
+    example: { type: 'string', minLength: 1, maxLength: 500 }
   }
 } as const
 export type Vocabulary = FromSchema<typeof vocabularySchema>
@@ -36,7 +38,7 @@ export const vocabularyDataSchema = {
   $id: 'VocabularyData',
   type: 'object',
   additionalProperties: false,
-  required: ['text'],
+  required: ['word'],
   properties: {
     ...vocabularySchema.properties
   }

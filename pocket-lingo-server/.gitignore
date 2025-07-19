@@ -120,5 +120,4 @@ dist
 *.sqlite
 
 lib/
-migrations/
 examples/
