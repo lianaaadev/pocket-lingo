@@ -30,7 +30,7 @@ chrome-extension/
 - User can export their vocabulary to a JSON file
 ![Demo](./docs/demo_v1.gif)
 
-### V2
+### V2 (Building...)
 - User can sync their vocabulary with mobile app
 - User can view their saved vocabulary on mobile app
 

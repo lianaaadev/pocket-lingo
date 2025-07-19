@@ -144,6 +144,13 @@ function exportVocabulary() {
     });
 }
 
+function syncVocabulary() {
+    chrome.storage.local.get(['vocabulary'], (result) => {
+        const vocabulary = result.vocabulary || [];
+        console.log(vocabulary);
+    });
+}
+
 function updateWordCount(count) {
     wordCount.textContent = `${count} word${count !== 1 ? 's' : ''} saved`;
 }
