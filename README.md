@@ -23,11 +23,12 @@ chrome-extension/
 
 ## Features
 
-### Version 1.0
+### V1
 - User can save words and phrases they encounter while browsing the web
 - User can view their saved vocabulary
 - User can clear all vocabulary
 - User can export their vocabulary to a JSON file
+![Demo](./docs/demo_v1.gif)
 
-### Version 2.0
+### V2
 - 
