@@ -31,4 +31,9 @@ chrome-extension/
 ![Demo](./docs/demo_v1.gif)
 
 ### V2
-- 
+- User can sync their vocabulary with mobile app
+- User can view their saved vocabulary on mobile app
+
+### Tech Stack
+- Chrome Extension
+- React Native (Expo)
