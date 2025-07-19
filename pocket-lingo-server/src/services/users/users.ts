@@ -1,6 +1,5 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
-import { LocalStrategy } from '@feathersjs/authentication-local'
 
 import { hooks as schemaHooks } from '@feathersjs/schema'
 
@@ -46,7 +45,7 @@ export const users = (app: Application) => {
     },
     before: {
       create: [
-        schemaHooks.validateData(usersDataValidator), 
+        schemaHooks.validateData(usersDataValidator),
         schemaHooks.resolveData(usersDataResolver)
       ],
       get: [schemaHooks.validateQuery(usersQueryValidator), schemaHooks.resolveQuery(usersQueryResolver)]

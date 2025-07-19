@@ -1,6 +1,7 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.schemas.html
 import { resolve, getValidator, querySyntax } from '@feathersjs/schema'
 import type { FromSchema } from '@feathersjs/schema'
+import { passwordHash } from '@feathersjs/authentication-local'
 
 import type { HookContext } from '../../declarations'
 import { dataValidator, queryValidator } from '../../validators'
@@ -48,7 +49,11 @@ export const usersDataSchema = {
 } as const
 export type UsersData = FromSchema<typeof usersDataSchema>
 export const usersDataValidator = getValidator(usersDataSchema, dataValidator)
-export const usersDataResolver = resolve<UsersData, HookContext<UsersService>>({})
+export const usersDataResolver = resolve<UsersData, HookContext<UsersService>>({
+  properties: {
+    password: passwordHash({ strategy: 'local' })
+  }
+})
 
 //*********************
 // USERS PATCH SCHEMA
