@@ -12,7 +12,22 @@ export const configurationSchema = {
     ...defaultAppSettings,
     host: { type: 'string' },
     port: { type: 'number' },
-    public: { type: 'string' }
+    public: { type: 'string' },
+    authentication: {
+      type: 'object',
+      required: ['secret', 'service'],
+      properties: {
+        secret: { type: 'string' },
+        service: { type: 'string' },
+        local: {
+          type: 'object',
+          properties: {
+            usernameField: { type: 'string' },
+            passwordField: { type: 'string' }
+          }
+        }
+      }
+    }
   }
 } as const
 

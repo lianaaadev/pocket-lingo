@@ -10,7 +10,9 @@ export type { Vocabulary, VocabularyData, VocabularyPatch, VocabularyQuery }
 
 export interface VocabularyParams extends KnexAdapterParams<VocabularyQuery> {}
 
-// By default calls the standard Knex adapter service methods but can be customized with your own functionality.
+//*********************
+// VOCABULARY SERVICE
+//*********************
 export class VocabularyService<ServiceParams extends Params = VocabularyParams> extends KnexService<
   Vocabulary,
   VocabularyData,

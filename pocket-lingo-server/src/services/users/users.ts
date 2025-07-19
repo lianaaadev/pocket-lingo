@@ -1,5 +1,6 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
+import { LocalStrategy } from '@feathersjs/authentication-local'
 
 import { hooks as schemaHooks } from '@feathersjs/schema'
 
@@ -36,17 +37,27 @@ export const users = (app: Application) => {
   app.service(usersPath).hooks({
     around: {
       all: [
-        authenticate('jwt'),
-        schemaHooks.resolveExternal(usersExternalResolver),
-        schemaHooks.resolveResult(usersResolver)
+        authenticate('jwt'), // authenticate user
+        schemaHooks.resolveExternal(usersExternalResolver), // remove password from response
+        schemaHooks.resolveResult(usersResolver) // return user
+      ],
+      create: [
+        schemaHooks.resolveExternal(usersExternalResolver), // remove password from response
+        schemaHooks.resolveData(usersDataResolver) // create user
       ]
     },
     before: {
       all: [schemaHooks.validateQuery(usersQueryValidator), schemaHooks.resolveQuery(usersQueryResolver)],
       find: [],
       get: [],
-      create: [schemaHooks.validateData(usersDataValidator), schemaHooks.resolveData(usersDataResolver)],
-      patch: [schemaHooks.validateData(usersPatchValidator), schemaHooks.resolveData(usersPatchResolver)],
+      create: [
+        schemaHooks.validateData(usersDataValidator), 
+        schemaHooks.resolveData(usersDataResolver)
+      ],
+      patch: [
+        schemaHooks.validateData(usersPatchValidator), 
+        schemaHooks.resolveData(usersPatchResolver)
+      ],
       remove: []
     },
     after: {

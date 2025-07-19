@@ -10,7 +10,9 @@ export type { Users, UsersData, UsersPatch, UsersQuery }
 
 export interface UsersParams extends KnexAdapterParams<UsersQuery> {}
 
-// By default calls the standard Knex adapter service methods but can be customized with your own functionality.
+//*********************
+// USERS SERVICE
+//*********************
 export class UsersService<ServiceParams extends Params = UsersParams> extends KnexService<
   Users,
   UsersData,

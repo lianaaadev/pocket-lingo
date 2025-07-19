@@ -13,5 +13,13 @@
     "client": "sqlite3",
     "connection": "pocket-lingo-server.sqlite",
     "useNullAsDefault": true
+  },
+  "authentication": {
+    "service": "users",
+    "local": {
+      "usernameField": "username",
+      "passwordField": "password"
+    },
+    "secret": "FEATHERS_SECRET"
   }
 }

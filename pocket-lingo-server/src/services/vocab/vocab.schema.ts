@@ -6,7 +6,9 @@ import type { HookContext } from '../../declarations'
 import { dataValidator, queryValidator } from '../../validators'
 import type { VocabularyService } from './vocab.class'
 
-// Main data model schema
+//*********************
+// VOCABULARY SCHEMA
+//*********************
 export const vocabularySchema = {
   $id: 'Vocabulary',
   type: 'object',
@@ -22,9 +24,14 @@ export type Vocabulary = FromSchema<typeof vocabularySchema>
 export const vocabularyValidator = getValidator(vocabularySchema, dataValidator)
 export const vocabularyResolver = resolve<Vocabulary, HookContext<VocabularyService>>({})
 
+//*********************
+// VOCABULARY EXTERNAL RESOLVER
+//*********************
 export const vocabularyExternalResolver = resolve<Vocabulary, HookContext<VocabularyService>>({})
 
-// Schema for creating new data
+//*********************
+// VOCABULARY DATA SCHEMA
+//*********************
 export const vocabularyDataSchema = {
   $id: 'VocabularyData',
   type: 'object',
@@ -38,7 +45,9 @@ export type VocabularyData = FromSchema<typeof vocabularyDataSchema>
 export const vocabularyDataValidator = getValidator(vocabularyDataSchema, dataValidator)
 export const vocabularyDataResolver = resolve<VocabularyData, HookContext<VocabularyService>>({})
 
-// Schema for updating existing data
+//*********************
+// VOCABULARY PATCH SCHEMA
+//*********************
 export const vocabularyPatchSchema = {
   $id: 'VocabularyPatch',
   type: 'object',
@@ -52,7 +61,9 @@ export type VocabularyPatch = FromSchema<typeof vocabularyPatchSchema>
 export const vocabularyPatchValidator = getValidator(vocabularyPatchSchema, dataValidator)
 export const vocabularyPatchResolver = resolve<VocabularyPatch, HookContext<VocabularyService>>({})
 
-// Schema for allowed query properties
+//*********************
+// VOCABULARY QUERY SCHEMA
+//*********************
 export const vocabularyQuerySchema = {
   $id: 'VocabularyQuery',
   type: 'object',
