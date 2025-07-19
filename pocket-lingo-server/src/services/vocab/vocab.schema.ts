@@ -1,0 +1,66 @@
+// For more information about this file see https://dove.feathersjs.com/guides/cli/service.schemas.html
+import { resolve, getValidator, querySyntax } from '@feathersjs/schema'
+import type { FromSchema } from '@feathersjs/schema'
+
+import type { HookContext } from '../../declarations'
+import { dataValidator, queryValidator } from '../../validators'
+import type { VocabularyService } from './vocab.class'
+
+// Main data model schema
+export const vocabularySchema = {
+  $id: 'Vocabulary',
+  type: 'object',
+  additionalProperties: false,
+  required: ['id', 'text'],
+  properties: {
+    id: { type: 'number' },
+
+    text: { type: 'string' }
+  }
+} as const
+export type Vocabulary = FromSchema<typeof vocabularySchema>
+export const vocabularyValidator = getValidator(vocabularySchema, dataValidator)
+export const vocabularyResolver = resolve<Vocabulary, HookContext<VocabularyService>>({})
+
+export const vocabularyExternalResolver = resolve<Vocabulary, HookContext<VocabularyService>>({})
+
+// Schema for creating new data
+export const vocabularyDataSchema = {
+  $id: 'VocabularyData',
+  type: 'object',
+  additionalProperties: false,
+  required: ['text'],
+  properties: {
+    ...vocabularySchema.properties
+  }
+} as const
+export type VocabularyData = FromSchema<typeof vocabularyDataSchema>
+export const vocabularyDataValidator = getValidator(vocabularyDataSchema, dataValidator)
+export const vocabularyDataResolver = resolve<VocabularyData, HookContext<VocabularyService>>({})
+
+// Schema for updating existing data
+export const vocabularyPatchSchema = {
+  $id: 'VocabularyPatch',
+  type: 'object',
+  additionalProperties: false,
+  required: [],
+  properties: {
+    ...vocabularySchema.properties
+  }
+} as const
+export type VocabularyPatch = FromSchema<typeof vocabularyPatchSchema>
+export const vocabularyPatchValidator = getValidator(vocabularyPatchSchema, dataValidator)
+export const vocabularyPatchResolver = resolve<VocabularyPatch, HookContext<VocabularyService>>({})
+
+// Schema for allowed query properties
+export const vocabularyQuerySchema = {
+  $id: 'VocabularyQuery',
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    ...querySyntax(vocabularySchema.properties)
+  }
+} as const
+export type VocabularyQuery = FromSchema<typeof vocabularyQuerySchema>
+export const vocabularyQueryValidator = getValidator(vocabularyQuerySchema, queryValidator)
+export const vocabularyQueryResolver = resolve<VocabularyQuery, HookContext<VocabularyService>>({})
