@@ -6,12 +6,10 @@ import { hooks as schemaHooks } from '@feathersjs/schema'
 
 import {
   usersDataValidator,
-  usersPatchValidator,
   usersQueryValidator,
   usersResolver,
   usersExternalResolver,
   usersDataResolver,
-  usersPatchResolver,
   usersQueryResolver
 } from './users.schema'
 
@@ -19,7 +17,7 @@ import type { Application } from '../../declarations'
 import { UsersService, getOptions } from './users.class'
 
 export const usersPath = 'users'
-export const usersMethods: Array<keyof UsersService> = ['find', 'get', 'create', 'patch', 'remove']
+export const usersMethods: Array<keyof UsersService> = ['get', 'create']
 
 export * from './users.class'
 export * from './users.schema'
@@ -36,35 +34,22 @@ export const users = (app: Application) => {
   // Initialize hooks
   app.service(usersPath).hooks({
     around: {
-      all: [
-        authenticate('jwt'), // authenticate user
+      create: [
         schemaHooks.resolveExternal(usersExternalResolver), // remove password from response
         schemaHooks.resolveResult(usersResolver) // return user
       ],
-      create: [
+      get: [
+        authenticate('jwt'), // ensure user is authenticated
         schemaHooks.resolveExternal(usersExternalResolver), // remove password from response
-        schemaHooks.resolveData(usersDataResolver) // create user
+        schemaHooks.resolveResult(usersResolver) // return user
       ]
     },
     before: {
-      all: [schemaHooks.validateQuery(usersQueryValidator), schemaHooks.resolveQuery(usersQueryResolver)],
-      find: [],
-      get: [],
       create: [
         schemaHooks.validateData(usersDataValidator), 
         schemaHooks.resolveData(usersDataResolver)
       ],
-      patch: [
-        schemaHooks.validateData(usersPatchValidator), 
-        schemaHooks.resolveData(usersPatchResolver)
-      ],
-      remove: []
-    },
-    after: {
-      all: []
-    },
-    error: {
-      all: []
+      get: [schemaHooks.validateQuery(usersQueryValidator), schemaHooks.resolveQuery(usersQueryResolver)]
     }
   })
 }

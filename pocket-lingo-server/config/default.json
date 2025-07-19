@@ -16,6 +16,10 @@
   },
   "authentication": {
     "service": "users",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
     "local": {
       "usernameField": "username",
       "passwordField": "password"
