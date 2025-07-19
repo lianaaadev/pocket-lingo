@@ -6,30 +6,42 @@ import type { HookContext } from '../../declarations'
 import { dataValidator, queryValidator } from '../../validators'
 import type { UsersService } from './users.class'
 
-// Main data model schema
+//*********************
+// USERS SCHEMA 
+//*********************
 export const usersSchema = {
   $id: 'Users',
   type: 'object',
   additionalProperties: false,
-  required: ['id', 'text'],
+  required: ['id', 'firstName', 'lastName', 'username', 'password'],
   properties: {
     id: { type: 'number' },
-
-    text: { type: 'string' }
+    firstName: { type: 'string' },
+    lastName: { type: 'string' },
+    username: { type: 'string' },
+    password: { type: 'string' }
   }
 } as const
+
 export type Users = FromSchema<typeof usersSchema>
 export const usersValidator = getValidator(usersSchema, dataValidator)
 export const usersResolver = resolve<Users, HookContext<UsersService>>({})
 
-export const usersExternalResolver = resolve<Users, HookContext<UsersService>>({})
+//*********************
+// USERS EXTERNAL RESOLVER
+//*********************
+export const usersExternalResolver = resolve<Users, HookContext<UsersService>>({
+  password: async () => undefined
+})
 
-// Schema for creating new data
+//*********************
+// USERS DATA SCHEMA
+//*********************
 export const usersDataSchema = {
   $id: 'UsersData',
   type: 'object',
   additionalProperties: false,
-  required: ['text'],
+  required: ['firstName', 'lastName', 'username', 'password'],
   properties: {
     ...usersSchema.properties
   }
@@ -38,7 +50,9 @@ export type UsersData = FromSchema<typeof usersDataSchema>
 export const usersDataValidator = getValidator(usersDataSchema, dataValidator)
 export const usersDataResolver = resolve<UsersData, HookContext<UsersService>>({})
 
-// Schema for updating existing data
+//*********************
+// USERS PATCH SCHEMA
+//*********************
 export const usersPatchSchema = {
   $id: 'UsersPatch',
   type: 'object',
@@ -52,7 +66,9 @@ export type UsersPatch = FromSchema<typeof usersPatchSchema>
 export const usersPatchValidator = getValidator(usersPatchSchema, dataValidator)
 export const usersPatchResolver = resolve<UsersPatch, HookContext<UsersService>>({})
 
-// Schema for allowed query properties
+//*********************
+// USERS QUERY SCHEMA
+//*********************
 export const usersQuerySchema = {
   $id: 'UsersQuery',
   type: 'object',
