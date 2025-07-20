@@ -56,32 +56,31 @@ export const usersDataResolver = resolve<UsersData, HookContext<UsersService>>({
 })
 
 //*********************
-// USERS PATCH SCHEMA
-//*********************
-export const usersPatchSchema = {
-  $id: 'UsersPatch',
-  type: 'object',
-  additionalProperties: false,
-  required: [],
-  properties: {
-    ...usersSchema.properties
-  }
-} as const
-export type UsersPatch = FromSchema<typeof usersPatchSchema>
-export const usersPatchValidator = getValidator(usersPatchSchema, dataValidator)
-export const usersPatchResolver = resolve<UsersPatch, HookContext<UsersService>>({})
-
-//*********************
 // USERS QUERY SCHEMA
 //*********************
+export const usersQueryProperties = {
+  id: { type: 'number' },
+  firstName: { type: 'string' },
+  lastName: { type: 'string' },
+  username: { type: 'string' }
+} as const
+
 export const usersQuerySchema = {
   $id: 'UsersQuery',
   type: 'object',
   additionalProperties: false,
   properties: {
-    ...querySyntax(usersSchema.properties)
+    ...querySyntax(usersQueryProperties)
   }
 } as const
+
 export type UsersQuery = FromSchema<typeof usersQuerySchema>
 export const usersQueryValidator = getValidator(usersQuerySchema, queryValidator)
-export const usersQueryResolver = resolve<UsersQuery, HookContext<UsersService>>({})
+export const usersQueryResolver = resolve<UsersQuery, HookContext<UsersService>>({
+  properties: {
+    id: async (value) => value,
+    firstName: async (value) => value,
+    lastName: async (value) => value,
+    username: async (value) => value
+  }
+})
