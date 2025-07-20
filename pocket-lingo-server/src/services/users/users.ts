@@ -58,7 +58,7 @@ export const users = (app: Application) => {
         schemaHooks.resolveResult(usersResolver) // return user
       ],
       find: [
-        // authenticate('jwt'), // ensure user is authenticated
+        authenticate('jwt'), // ensure user is authenticated
         schemaHooks.resolveExternal(usersExternalResolver), // remove password from response
         schemaHooks.resolveResult(usersResolver) // return user
       ]

@@ -9,7 +9,10 @@ declare module './declarations' {
 }
 
 export const authentication = (app: Application) => {
-  const authentication = new AuthenticationService(app)
+  const authentication = new AuthenticationService(app, 'authentication', {
+    entity: 'user',
+    service: 'users'
+  })
 
   authentication.register('jwt', new JWTStrategy())
   authentication.register('local', new LocalStrategy())
