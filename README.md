@@ -32,8 +32,19 @@ chrome-extension/
 
 ### V2 (Building...)
 - User can sync their vocabulary with mobile app
+  - Backend API to handle syncing
+    - [x] Create User
+    - [x] Authenticate User
+    - [] Create Vocabulary
 - User can view their saved vocabulary on mobile app
+  - Backend API to handle fetching vocabulary
+    - [] Get Vocabulary
+  - Frontend to display vocabulary
+    - [] Very simple UI to display vocabulary as flash cards
 
 ### Tech Stack
 - Chrome Extension
 - React Native (Expo)
+- FeatherJS
+- SQLite
+- JWT for authentication
