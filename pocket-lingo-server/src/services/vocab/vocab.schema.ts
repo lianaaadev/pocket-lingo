@@ -13,13 +13,13 @@ export const vocabularySchema = {
   $id: 'Vocabulary',
   type: 'object',
   additionalProperties: false,
-  required: ['id', 'word'],
+  required: ['id', 'word', 'userId'],
   properties: {
     id: { type: 'number' },
-
     word: { type: 'string', minLength: 1, maxLength: 100 },
     definition: { type: 'string', minLength: 1, maxLength: 500 },
-    example: { type: 'string', minLength: 1, maxLength: 500 }
+    example: { type: 'string', minLength: 1, maxLength: 500 },
+    userId: { type: 'number' }
   }
 } as const
 export type Vocabulary = FromSchema<typeof vocabularySchema>
@@ -46,22 +46,6 @@ export const vocabularyDataSchema = {
 export type VocabularyData = FromSchema<typeof vocabularyDataSchema>
 export const vocabularyDataValidator = getValidator(vocabularyDataSchema, dataValidator)
 export const vocabularyDataResolver = resolve<VocabularyData, HookContext<VocabularyService>>({})
-
-//*********************
-// VOCABULARY PATCH SCHEMA
-//*********************
-export const vocabularyPatchSchema = {
-  $id: 'VocabularyPatch',
-  type: 'object',
-  additionalProperties: false,
-  required: [],
-  properties: {
-    ...vocabularySchema.properties
-  }
-} as const
-export type VocabularyPatch = FromSchema<typeof vocabularyPatchSchema>
-export const vocabularyPatchValidator = getValidator(vocabularyPatchSchema, dataValidator)
-export const vocabularyPatchResolver = resolve<VocabularyPatch, HookContext<VocabularyService>>({})
 
 //*********************
 // VOCABULARY QUERY SCHEMA

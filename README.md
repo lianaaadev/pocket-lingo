@@ -35,10 +35,10 @@ chrome-extension/
   - Backend API to handle syncing
     - [x] Create User
     - [x] Authenticate User
-    - [] Create Vocabulary
+    - [x] Create Vocabulary
 - User can view their saved vocabulary on mobile app
   - Backend API to handle fetching vocabulary
-    - [] Get Vocabulary
+    - [x] Get Vocabulary
   - Frontend to display vocabulary
     - [] Very simple UI to display vocabulary as flash cards
 

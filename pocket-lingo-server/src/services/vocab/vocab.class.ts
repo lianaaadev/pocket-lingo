@@ -4,9 +4,9 @@ import { KnexService } from '@feathersjs/knex'
 import type { KnexAdapterParams, KnexAdapterOptions } from '@feathersjs/knex'
 
 import type { Application } from '../../declarations'
-import type { Vocabulary, VocabularyData, VocabularyPatch, VocabularyQuery } from './vocab.schema'
+import type { Vocabulary, VocabularyData, VocabularyQuery } from './vocab.schema'
 
-export type { Vocabulary, VocabularyData, VocabularyPatch, VocabularyQuery }
+export type { Vocabulary, VocabularyData, VocabularyQuery }
 
 export interface VocabularyParams extends KnexAdapterParams<VocabularyQuery> {}
 
@@ -16,14 +16,14 @@ export interface VocabularyParams extends KnexAdapterParams<VocabularyQuery> {}
 export class VocabularyService<ServiceParams extends Params = VocabularyParams> extends KnexService<
   Vocabulary,
   VocabularyData,
-  VocabularyParams,
-  VocabularyPatch
+  VocabularyParams
 > {}
 
 export const getOptions = (app: Application): KnexAdapterOptions => {
   return {
     paginate: app.get('paginate'),
     Model: app.get('sqliteClient'),
-    name: 'vocab'
+    name: 'vocab',
+    id: 'id'
   }
 }
