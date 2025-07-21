@@ -39,6 +39,8 @@ chrome-extension/
   - Frontend to display vocabulary
     - [x] Very simple UI to display vocabulary as flash cards
 
+![DemoV2](./docs/demo_v2.gif)
+
 ### V3: 🚧 [ In Progress ] Mobile app basic enhancements 🚧
 - User can refresh page to fetch latest vocabulary
 - User can login to mobile app
