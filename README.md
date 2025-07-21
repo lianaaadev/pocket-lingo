@@ -32,25 +32,35 @@ chrome-extension/
 
 ![Demo](./docs/demo_v1.gif)
 
-### V2: 🚧 [ In Progress ] Mobile app can display a list of vocabulary 🚧
-- User can create new vocabulary in mobile app
-  - Backend API to handle syncing
-    - [x] Create User
-    - [x] Authenticate User
-    - [x] Create Vocabulary
-  - Frontend to create vocabulary
-    - [] Simple UI to create vocabulary
+### V2: Mobile app can display a list of vocabulary 
 - User can view their saved vocabulary on mobile app
   - Backend API to handle fetching vocabulary
-    - [x] Get Vocabulary
+    - [x] Get Vocabulary by user token
   - Frontend to display vocabulary
-    - [] Very simple UI to display vocabulary as flash cards
+    - [x] Very simple UI to display vocabulary as flash cards
 
-### V3: Chrome extension can sync with mobile app
+### V3: 🚧 [ In Progress ] Mobile app basic enhancements 🚧
+- User can refresh page to fetch latest vocabulary
+- User can login to mobile app
+  - Backend API to handle login
+    - [x] Authenticate User
+  - Frontend to handle login
+    - [] Login screen
+    - [x] Token storage
+- User can create account on mobile app
+  - Backend API to handle account creation
+    - [x] Create User
+  - Frontend to handle account creation
+    - [] Register screen 
+- User can create new vocabulary in mobile app
+  - [x] Backend - create vocabulary
+  - [] Frontend - Simple UI to create vocabulary
+
+### V4: Chrome extension can sync with mobile app
 - Create/login functionality for chrome extension
 - User can sync their vocabulary from Chrome extension to mobile app
 
-### V4: Mobile app can fetch definitions and sample sentences
+### V5: Mobile app can fetch definitions and sample sentences
 - User can create vocabulary from mobile app
 - User can fetch definition and sample sentences for their vocabulary list through mobile app
 
