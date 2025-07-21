@@ -18,4 +18,15 @@ export const authentication = (app: Application) => {
   authentication.register('local', new LocalStrategy())
 
   app.use('authentication', authentication)
-} 
+
+  app.service('authentication').hooks({
+    after: {
+      create: [
+        (context) => {
+          console.log('✅ AUTH:', context.result); // TODO: for test only. Remove in production!
+          return context;
+        }
+      ]
+    }
+  });
+}

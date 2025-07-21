@@ -1,42 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
+import AuthService from '../services/authService';
+import VocabService from '../services/vocabService';
 import FlashCard from '../components/FlashCard';
 
-// Mock vocabulary data
-const mockVocabulary = [
-  {
-    id: 1,
-    word: 'Ubiquitous',
-    translation: 'Found everywhere',
-    example: 'Smartphones are ubiquitous in modern society.'
-  },
-  {
-    id: 2,
-    word: 'Ephemeral',
-    translation: 'Lasting for a very short time',
-    example: 'The beauty of cherry blossoms is ephemeral.'
-  },
-  {
-    id: 3,
-    word: 'Perspicacious',
-    translation: 'Having sharp understanding',
-    example: 'The detective was perspicacious in solving the mystery.'
-  },
-  {
-    id: 4,
-    word: 'Serendipity',
-    translation: 'A pleasant surprise',
-    example: 'Finding that old book was pure serendipity.'
-  },
-  {
-    id: 5,
-    word: 'Mellifluous',
-    translation: 'Sweet and smooth sounding',
-    example: 'The singer\'s mellifluous voice filled the concert hall.'
-  }
-];
-
 const HomeScreen = () => {
+  const [vocabList, setVocabList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const authenticateThenFetchVocabList = async () => {
+      setLoading(true);
+
+      try {
+        let loginResult = await AuthService.checkLoggedIn();
+
+        if (!loginResult) {
+          // TODO: Implement a proper login flow
+          const TEST_USERNAME = process.env.EXPO_PUBLIC_TEST_USERNAME;
+          const TEST_PASSWORD = process.env.EXPO_PUBLIC_TEST_PASSWORD;
+
+          await AuthService.login(TEST_USERNAME, TEST_PASSWORD);
+        }
+
+        const vocabResult = await VocabService.getVocabList();
+        setVocabList(vocabResult);
+
+      } catch (err) {
+        setError('Failed to load vocabulary: ' + err.message);
+
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    authenticateThenFetchVocabList();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -49,11 +50,12 @@ const HomeScreen = () => {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {mockVocabulary.map((item) => (
+        {vocabList && vocabList.length > 0 &&
+          vocabList.map((item) => (
           <FlashCard
             key={item.id}
             word={item.word}
-            translation={item.translation}
+            definition={item.definition}
             example={item.example}
           />
         ))}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Animated } from 'react-native';
 
-const FlashCard = ({ word, translation, example }) => {
+const FlashCard = ({ word, definition, example }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [flipAnimation] = useState(new Animated.Value(0));
 
@@ -41,12 +41,12 @@ const FlashCard = ({ word, translation, example }) => {
           {/* Front of card */}
           <Animated.View style={[styles.card, styles.cardFront, frontAnimatedStyle]}>
             <Text style={styles.word}>{word}</Text>
-            <Text style={styles.hint}>Tap to see translation</Text>
+            <Text style={styles.hint}>Tap to see definition</Text>
           </Animated.View>
 
           {/* Back of card */}
           <Animated.View style={[styles.card, styles.cardBack, backAnimatedStyle]}>
-            <Text style={styles.translation}>{translation}</Text>
+            <Text style={styles.definition}>{definition}</Text>
             {example && (
               <Text style={styles.example}>{example}</Text>
             )}
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 10,
   },
-  translation: {
+  definition: {
     fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
